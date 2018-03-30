@@ -1,0 +1,90 @@
+<h1><span><a name="Motivační_příklad">Motivační příklad</a></span></h1>
+
+<p>
+
+Dejme tomu, že pracujeme ve vývojovém týmu, jehož cílem je vytvořit internetový obchod s mimozemskými artefakty. Softwaroví architekti vybrali jedno z obecných řešení s otevřeným zdrojovým kódem, ale nejsou si jistí jeho kvalitou. Bylo rozhodnuto, že kvůli dalšímu procesu vývoje je potřeba mít automatizované testy ověřující základní funkcionalitu daného řešení. Byla vybrána technologie BDD a Selenium, i když s danými technologiemi nemá ve vývojovém týmu nikdo žádnou zkušenost. Vaším cílem je tento nedostatek eliminovat, navrhnout a implementovat testy pro daný internetový obchod.
+</p>
+
+<h1><span><a name="Cíl_projektu">Cíl projektu</a></span></h1>
+
+<p>
+
+Cílem projektu je:
+</p>
+
+<ol>
+<li class="level1">Podrobně se seznámit se zadanou oblastí testované aplikace (zdrojem nechť jsou dokumentace na internetu, selský rozum v případě neexistující dokumentace nebo informace od zadavatele projektu). <b>Zvolit a navrhnout</b>, co je cílem testů (které části povrchově do šířky nebo hloubkově do detailu budou testované).</li>
+<li class="level1">Nastudovat chováním řízený vývoj (Behaviour-driven development, BDD).</li>
+<li class="level1">Vypracovat <b>scénáře BDD</b> pro testování zadané oblasti testované aplikace. Podrobné pokyny jsou níže.</li>
+</ol>
+
+<p>
+
+Na 1. projekt navazuje 2. projekt, ve kterém budete implementovat vámi navržené testy pomocí nástroje <a href="http://www.seleniumhq.org/" class="external" title="http://www.seleniumhq.org/" rel="nofollow">Selenium</a> a <a href="https://github.com/behave/behave" class="external" title="https://github.com/behave/behave" rel="nofollow">Behave</a> (<a href="https://behave.readthedocs.io/" class="external" title="https://behave.readthedocs.io/" rel="nofollow">Dokumentace)</a>. Toto je třeba zohlednit při tvorbě testovacích scénářů BDD. Na hodnocení prvního projektu bude mít největší vliv váš výběr testovaných částí a kvalita vypracování testovacích scénářů.
+</p>
+
+<h1><span><a name="Testovaná_aplikace">Testovaná aplikace</a></span></h1>
+
+<p>
+
+Testovanou aplikací je instance eCommerce platforma OpenCart.
+</p>
+
+<h2><span><a name="Instance_a_jejich_správa">Instance a jejich správa</a></span></h2>
+
+<ul>
+<li class="level1">Každý student má přiřazenou jednu instanci, viz <a href="http://www.fit.vutbr.cz/study/courses/ITS/public/instances.php" class="external" title="http://www.fit.vutbr.cz/study/courses/ITS/public/instances.php" rel="nofollow">http://www.fit.vutbr.cz/study/courses/ITS/public/instances.php</a> . Seznam instancí se liší TCP portem, na které daná instance poslouchá.</li>
+<li class="level1">Každý eCommerce systém má své administrativní rozhraní (login a heslo je "admin").</li>
+<li class="level1">Reset instancí (návrat do původního stavu) je možný pomocí příslušného odkazu/tlačítka v seznamu instancí.</li>
+<li class="level1">Jednotlivé instance jsou obecně přístupné - buďte prosím slušní a nezasahujte do cizích instancí.</li>
+</ul>
+
+<h2><span><a name="Testovací_cíl">Testovací cíl</a></span></h2>
+
+<p>
+
+S danou aplikací se sezname a vyberte si podčást, pro kterou navrhnete testovací plán. Mějte na mysli, že vámi navržené testovací scénáře budete později implementovat jako automatizované testy. Inspirace pro vybrané podčásti:
+</p>
+
+<ul>
+<li class="level1">Nákupní proces produktu.</li>
+<li class="level1">Správa produktů v administraci.</li>
+<li class="level1">Správa uživatelů.</li>
+<li class="level1">Správa objednávek.</li>
+<li class="level1">...</li>
+</ul>
+
+<h1><span><a name="Pokyny_k_vypracování_testovacích_scénářů">Pokyny k vypracování testovacích scénářů</a></span></h1>
+
+<p>
+
+Scénáře BDD vypracujte v souborech s příponou .feature. Syntaxi jazyka, význam příkazů a nejlepší praktiky pro psaní scénářů nastudujte dle dokumentace, doporučené četby a vlastních zdrojů. Minimální počet scénářů není definován, avšak bude mít vliv na hodnocení projektu. Zároveň ve volbě rozsahu scénářů zohledněte, že ve druhém projektu budete implementovat odpovídající testovací případy pomocí automatizovaných testů GUI. Testování GUI bude tématem dalších přednášek.
+</p>
+
+<p>
+
+Soubory se scénáři musí doprovázet soubor README.md, který bude obsahovat stručný popis testovaných vlastností.
+</p>
+
+<ul>
+<li class="level1">Cílem souboru je seznámit čtenáře s rozsahem testovaných vlastností a vztahem těchto vlastností k jednotlivým souborům popisující scénáře BDD.</li>
+<li class="level1">Obsah souboru není definován, kladně hodnocené budou přehledné, stručné a zároveň úplné popisy.</li>
+<li class="level1">Soubor README.md bude ve formátu Markdown. Používejte co nejméně formátování, ideálně tedy variantu <b>strict</b>. Ověřit validitu textu ve formátu Markdown můžete na konvertoru <a href="http://pandoc.org/try/" class="external" title="http://pandoc.org/try/" rel="nofollow">pandoc</a>. Jazyk textu může být CZ/SK/EN, vše UTF-8.</li>
+</ul>
+
+<h2><span><a name="Způsob_odevzdání">Způsob odevzdání</a></span></h2>
+
+<p>
+
+Soubory .feature a README.md zabalte do archivu .zip (bez vnitřní adresářové struktury). Archiv odevzdejte prostřednictvím informačního systému.
+</p>
+
+<h1><span><a name="Četba,_informační_zdroje">Četba, informační zdroje</a></span></h1>
+
+<ul>
+<li class="level1">Repozitář Behave. <a href="https://github.com/behave/behave" class="external" title="https://github.com/behave/behave" rel="nofollow">https://github.com/behave/behave</a></li>
+<li class="level1">Online dokumentace. <a href="https://behave.readthedocs.io" class="external" title="https://behave.readthedocs.io" rel="nofollow">https://behave.readthedocs.io</a> </li>
+<li class="level1">Nejlepší praktiky BDD. <a href="https://automationpanda.com/2017/01/30/bdd-101-writing-good-gherkin/" class="external" title="https://automationpanda.com/2017/01/30/bdd-101-writing-good-gherkin/" rel="nofollow">https://automationpanda.com/2017/01/30/bdd-101-writing-good-gherkin/</a></li>
+<li class="level1">Antivzory BDD. <a href="https://cucumber.io/blog/2016/07/01/cucumber-antipatterns-part-one" class="external" title="https://cucumber.io/blog/2016/07/01/cucumber-antipatterns-part-one" rel="nofollow">https://cucumber.io/blog/2016/07/01/cucumber-antipatterns-part-one</a></li>
+<li class="level1">Jednoduchý příklad Python+BDD+Selenium. <a href="https://testingbot.com/support/getting-started/behave.html" class="external" title="https://testingbot.com/support/getting-started/behave.html" rel="nofollow">https://testingbot.com/support/getting-started/behave.html</a></li>
+</ul>
