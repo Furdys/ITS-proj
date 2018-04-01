@@ -12,7 +12,7 @@ Feature: Shopping cart
 		Given a web browser is at e-shop homepage
 		And shopping cart contains iMac
 		When user clicks on "Shopping Cart"
-		Then the product and its price is shown
+		Then iMac is displayed to user
 		
 	Scenario: Remove item from cart
 		Given a web browser is at shopping cart page

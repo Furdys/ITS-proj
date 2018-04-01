@@ -10,19 +10,19 @@ Feature: Checkout
 		Then step <number> is displayed to user
 		
 		Examples:
-			| status     | number |
-			| logged     | 2      |
-			| not logged | 1      |
+			| status        | number |
+			| logged in     | 2      |
+			| not logged in | 1      |
 			
 	Scenario: Checkout Options
 		Given a web browser at checkout page step 1
-		And user is not logged
+		And user is not logged in
 		When user clicks on "Continue"
 		Then step 2 is displayed to user
 
 	Scenario Outline: Account & Billing Details - Not filling in required fields
 		Given a web browser at checkout page step 2
-		And unregistered user chosed to register in checkout step 1
+		And not logged in user chosed to register in checkout step 1
 		And <required> field is empty
 		When user clicks on "Continue" button
 		Then a warning below <required> field is displayed
@@ -62,15 +62,15 @@ Feature: Checkout
 	
 	Scenario Outline: Billing Details - Filling in required fields in 
 		Given a web browser at checkout page step 2
-		And checkbox "My delivery and billing addresses are the same." is <status>
+		And checkbox "My delivery and billing addresses are the same." is <state>
 		And required fields are filled in
 		When user clicks on "Continue" button
 		Then step <number> is displayed to user
 		
 		Examples:
-			| boolean      | number |
-			| checked      | 4      |
-			| not checked  | 3      |
+			| state       | number |
+			| checked     | 4      |
+			| not checked | 3      |
 			
 	Scenario: Delivery Details - Not filling in required fields
 		Given a web browser at checkout page step 3

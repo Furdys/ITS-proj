@@ -1,8 +1,8 @@
 Projekt 1 - Testovací scénáře
-=========================================
+=============================
 
 Autor: Jiří Furda (xfurda00)
-Testovací cíl: Nákupní procec produktu
+Testovací cíl: Nákupní proces produktu
 
 
 Nákupní košík (cart.feature)
