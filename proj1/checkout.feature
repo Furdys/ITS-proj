@@ -1,31 +1,31 @@
 Feature: Checkout
 	Background:
 		Given an eshop selling iMac
-		And user with iMac in shopping cart
+		And user with iMac in his shopping cart
 	
-	Scenario Outline: Checking out
+	Scenario Outline: Starting checkout
 		Given a web browser at e-shop homepage
 		And user is <status>
 		When user clicks on "Checkout" button
-		Then user is redirected to checkout page step <number>
+		Then step <number> is displayed to user
 		
 		Examples:
 			| status     | number |
 			| logged     | 2      |
 			| not logged | 1      |
 			
-	Scenario: Checkout options
+	Scenario: Checkout Options
 		Given a web browser at checkout page step 1
 		And user is not logged
 		When user clicks on "Continue"
-		Then step 2 is shown to the user
+		Then step 2 is displayed to user
 
-	Scenario Outline: Not filling in required fields in account & billing details
+	Scenario Outline: Account & Billing Details - Not filling in required fields
 		Given a web browser at checkout page step 2
 		And unregistered user chosed to register in checkout step 1
 		And <required> field is empty
 		When user clicks on "Continue" button
-		Then a warning below <required> field is shown
+		Then a warning below <required> field is displayed
 		
 		Examples:
 			| required         |
@@ -41,12 +41,12 @@ Feature: Checkout
 			| Country          |
 			| Region / State   |
 
-	Scenario Outline: Not filling in required fields in billing details
+	Scenario Outline: Billing Details - Not filling in required fields
 		Given a web browser at checkout page step 2
 		And "Guest Checkout" is selected in step 1
 		And <required> field is empty
 		When user clicks on "Continue" button
-		Then a warning below <required> field is shown
+		Then a warning below <required> field is displayed
 		
 		Examples:
 			| required       |
@@ -60,20 +60,20 @@ Feature: Checkout
 			| Country        |
 			| Region / State |
 	
-	Scenario Outline: Filling in required fields in billing details
+	Scenario Outline: Billing Details - Filling in required fields in 
 		Given a web browser at checkout page step 2
 		And checkbox "My delivery and billing addresses are the same." is <status>
 		And required fields are filled in
 		When user clicks on "Continue" button
-		Then step <number> is shown to the user
+		Then step <number> is displayed to user
 		
 		Examples:
 			| boolean      | number |
 			| checked      | 4      |
 			| not checked  | 3      |
 			
-	Scenario: Not filling in required fields in delivery details
-		Given a web browser at checkout page step 2
+	Scenario: Delivery Details - Not filling in required fields
+		Given a web browser at checkout page step 3
 		And <required> field is empty
 		When user clicks on "Continue" button
 		Then a warning below <required> field is shown
@@ -88,25 +88,30 @@ Feature: Checkout
 			| Country        |
 			| Region / State |		
 			
-	Scenario: Filling in required fields in delivery details
+	Scenario: Delivery Details - Filling in required fields
 		Given a web browser at checkout page step 3
 		And all required fields are filled in		
 		When user clicks on "Continue" button
-		Then step 4 is shown to the user
+		Then step 4 is displayed to user
+		
+	Scenario: Delivery Method
+		Given a web browser at checkout page step 4
+		When user clicks on "Continue" button
+		Then step 5 is displayed to user		
 
-	Scenario: Not accepting Terms & Conditions
+	Scenario: Payment Method - Not accepting Terms & Conditions
 		Given a web browser at checkout page step 5
 		And user doesn't check the "I have read and agree to the Terms & Conditions" box
 		When user clicks on "Continue" button
-		Then a warning is shown
+		Then a warning is displayed to user
 		
-	Scenario: Accepting Terms & Conditions
+	Scenario: Payment Method - Accepting Terms & Conditions
 		Given a web browser at checkout page step 5
 		And user check the "I have read and agree to the Terms & Conditions" box
 		When user clicks on "Continue" button
-		Then step 6 is shown to the user
+		Then step 6 is displayed to user
 
-	Scenario: Confirming order
+	Scenario: Confirm Order
 		Given a web browser at checkout page step 6
-		When user clicks on "Continue" button
-		Then user is redirected to success page
+		When user clicks on "Confirm Order" button
+		Then user is displayed "Your order has been placed!"

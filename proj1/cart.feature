@@ -22,6 +22,6 @@ Feature: Shopping cart
 					
 	Scenario: Change item quantity in cart
 		Given a web browser is at shopping cart page
-		And the shopping cart contains one iMac
+		And shopping cart contains one iMac
 		When user write "2" in the iMac quantity field and clicks "Update" button
-		Then the cart contains two iMacs	
+		Then shopping cart contains two iMacs	
