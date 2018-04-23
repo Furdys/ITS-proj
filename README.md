@@ -8,6 +8,7 @@ Subject: **	Testing and Dynamic Analysis (ITS)**
 
 ### Project 1
 * Score: **19/20**
+
 | Category | Score | Description                                       | Commentary                          |
 | -------- | ----- | ------------------------------------------------- | ----------------------------------- |
 | Text     | 4/5   | Scenario description (language, comprehesibility) | Feature should have apt description |
