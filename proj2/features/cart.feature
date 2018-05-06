@@ -10,3 +10,15 @@ Feature: Shopping cart
 		And shopping cart contains iMac
 		When user clicks on "Shopping Cart"
 		Then iMac is displayed to user
+
+	Scenario: Remove item from cart
+		Given a web browser is at shopping cart page
+		And shopping cart contains iMac		
+		When user clicks on "Remove" button in iMac field
+		Then iMac is removed from the shopping cart
+
+	Scenario: Change item quantity in cart
+		Given a web browser is at shopping cart page
+		And shopping cart contains iMac
+		When user write "2" in the iMac quantity field and clicks "Update" button
+		Then shopping cart contains two iMacs	
