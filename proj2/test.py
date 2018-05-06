@@ -7,11 +7,6 @@ import time
 
 class WebDriver(unittest.TestCase):
 	def setUp(self):
-		"""
-		self.driver = webdriver.Remote(
-			command_executor="http://mys01.fit.vutbr.cz:4444/wd/hub",
-			desired_capabilities=DesiredCapabilities.CHROME)
-		"""
 		dp = {'browserName': 'firefox', 'marionette': 'true',
 			'javascriptEnabled': 'true'}
 		self.driver = webdriver.Remote(command_executor='http://mys01.fit.vutbr.cz:4444/wd/hub',
@@ -23,6 +18,7 @@ class WebDriver(unittest.TestCase):
 	def addiMacToCart(self):
 		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=product/product&path=20_27&product_id=41")
 		self.driver.find_element_by_id("button-cart").click()			
+
 		
 	def test_addToCart(self):
 		self.addiMacToCart()
@@ -30,6 +26,7 @@ class WebDriver(unittest.TestCase):
 		text = self.driver.find_element_by_css_selector("div.alert.alert-success").text
 		
 		self.assertEqual("Success: You have added iMac to your shopping cart!\n×", text)
+		
 		
 	def test_checkItemsInCart(self):
 		self.addiMacToCart()
@@ -78,6 +75,7 @@ class WebDriver(unittest.TestCase):
 		self.assertEqual("Scanners (0)", self.driver.find_element_by_xpath("//li[@class='dropdown open']//div//ul//li[4]//a").text)
 		self.assertEqual("Web Cameras (0)", self.driver.find_element_by_xpath("//li[@class='dropdown open']//div//ul//li[5]//a").text)
 		
+		
 	def test_displayEmptySubcategory(self):
 		self.driver.get(self.base_url)
 
@@ -98,16 +96,6 @@ class WebDriver(unittest.TestCase):
 		self.assertEqual("Apple Cinema 30\"", self.driver.find_element_by_xpath("//a[contains(text(),'Apple Cinema 30\"')]").text)
 		self.assertEqual("Samsung SyncMaster 941BW", self.driver.find_element_by_xpath("//a[contains(text(),'Samsung SyncMaster 941BW')]").text)
 
-		
-		
-	"""
-	def loginTestUser(self):
-		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=account/login")
-		#self.driver.find_element_by_id("input-email").clear()
-		self.driver.find_element_by_id("input-email").send_keys("aaa@bbb.com")
-		self.driver.find_element_by_id("input-password").send_keys("12345")
-		self.driver.find_element_by_css_selector("input.btn.btn-primary").click()
-	"""
 
 	def test_startingCheckout(self):
 		self.addiMacToCart()
@@ -118,7 +106,46 @@ class WebDriver(unittest.TestCase):
 		
 		self.assertEqual("panel-collapse collapse in", self.driver.find_element_by_id("collapse-checkout-option").get_attribute("class"))
 	
-		#self.loginTestUser()
+		
+	def test_billingDetailsNotFillingInRequiredFields(self):
+		self.addiMacToCart()
+		
+		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=checkout/checkout")
+		
+		self.driver.find_element_by_xpath("(//input[@name='account'])[2]").click()
+		self.driver.find_element_by_id("button-account").click()
+		
+		
+		self.driver.find_element_by_id("button-guest").click()
+		
+		text = self.driver.find_element_by_css_selector("div.text-danger").text
+		
+		self.assertEqual("First Name must be between 1 and 32 characters!", text)
+
+
+	def test_billingDetailsFillingInRequiredFields(self):
+		self.addiMacToCart()
+		
+		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=checkout/checkout")
+		
+		self.driver.find_element_by_xpath("(//input[@name='account'])[2]").click()
+		self.driver.find_element_by_id("button-account").click()
+		
+		self.driver.find_element_by_id("input-payment-firstname").send_keys("aaa")
+		self.driver.find_element_by_id("input-payment-lastname").send_keys("bbb")
+		self.driver.find_element_by_id("input-payment-email").send_keys("aaa@bbb.com")
+		self.driver.find_element_by_id("input-payment-telephone").send_keys("123456789")
+		self.driver.find_element_by_id("input-payment-address-1").send_keys("ccc")
+		self.driver.find_element_by_id("input-payment-city").send_keys("ddd")
+		self.driver.find_element_by_id("input-payment-postcode").send_keys("12345")
+		self.driver.find_element_by_xpath("(//option[@value='3513'])").click()
+		
+		self.driver.find_element_by_id("button-guest").click()
+		
+		time.sleep(1)
+		
+		self.assertEqual("panel-collapse collapse in", self.driver.find_element_by_id("collapse-shipping-method").get_attribute("class"))
+	
 
 		
 if __name__ == "__main__":
