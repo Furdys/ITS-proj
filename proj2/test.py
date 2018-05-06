@@ -32,7 +32,7 @@ class WebDriver(unittest.TestCase):
 		self.addiMacToCart()
 		self.driver.get(self.base_url)
 		
-		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=checkout/cart")
+		self.driver.find_element_by_xpath("//div[@id='top-links']/ul/li[4]/a/span").click()
 		
 		text = self.driver.find_element_by_css_selector("table.table.table-bordered > tbody > tr > td.text-left").text
 		
