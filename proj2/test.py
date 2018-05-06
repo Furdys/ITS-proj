@@ -24,7 +24,6 @@ class WebDriver(unittest.TestCase):
 		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=product/product&path=20_27&product_id=41")
 		self.driver.find_element_by_id("button-cart").click()			
 		
-
 	def test_addToCart(self):
 		self.addiMacToCart()
 		
@@ -53,7 +52,33 @@ class WebDriver(unittest.TestCase):
 	
 		self.assertEqual("Your shopping cart is empty!", text)
 
+
+	def test_changeItemQuantityInCart(self):
+		self.addiMacToCart()
+		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=checkout/cart")
+		
+		
+		self.driver.find_element_by_xpath("//input[starts-with(@name, 'quantity')]").clear()
+		self.driver.find_element_by_xpath("//input[starts-with(@name, 'quantity')]").send_keys("2")
+		self.driver.find_element_by_css_selector("button.btn.btn-primary").click()
+		
+		text = self.driver.find_element_by_xpath("//input[starts-with(@name, 'quantity')]").get_attribute("value")
+
+		self.assertEqual("2", text)
+		
+
+	
 	def test_displaySubcategoriesList(self):
+		self.driver.get(self.base_url)
+		self.driver.find_element_by_xpath("//a[contains(text(),'Components')]").click()
+
+		self.assertEqual("Mice and Trackballs (0)", self.driver.find_element_by_xpath("//li[@class='dropdown open']//div//ul//li[1]//a").text)
+		self.assertEqual("Monitors (2)", self.driver.find_element_by_xpath("//li[@class='dropdown open']//div//ul//li[2]//a").text)
+		self.assertEqual("Printers (0)", self.driver.find_element_by_xpath("//li[@class='dropdown open']//div//ul//li[3]//a").text)
+		self.assertEqual("Scanners (0)", self.driver.find_element_by_xpath("//li[@class='dropdown open']//div//ul//li[4]//a").text)
+		self.assertEqual("Web Cameras (0)", self.driver.find_element_by_xpath("//li[@class='dropdown open']//div//ul//li[5]//a").text)
+		
+	def test_displayEmptySubcategory(self):
 		self.driver.get(self.base_url)
 
 		self.driver.find_element_by_xpath("//a[contains(text(),'Components')]").click()
@@ -63,8 +88,18 @@ class WebDriver(unittest.TestCase):
 	
 		self.assertEqual("There are no products to list in this category.", text)
 
+	
+	def test_displaySubcategory(self):
+		self.driver.get(self.base_url)
+		
+		self.driver.find_element_by_xpath("//a[contains(text(),'Components')]").click()
+		self.driver.find_element_by_xpath("//a[contains(text(),'Monitors (2)')]").click()
+		
+		self.assertEqual("Apple Cinema 30\"", self.driver.find_element_by_xpath("//a[contains(text(),'Apple Cinema 30\"')]").text)
+		self.assertEqual("Samsung SyncMaster 941BW", self.driver.find_element_by_xpath("//a[contains(text(),'Samsung SyncMaster 941BW')]").text)
 
-
+		
+		
 	"""
 	def loginTestUser(self):
 		self.driver.get("http://mys01.fit.vutbr.cz:8016/index.php?route=account/login")
@@ -73,7 +108,7 @@ class WebDriver(unittest.TestCase):
 		self.driver.find_element_by_id("input-password").send_keys("12345")
 		self.driver.find_element_by_css_selector("input.btn.btn-primary").click()
 	"""
-	"""	
+
 	def test_startingCheckout(self):
 		self.addiMacToCart()
 		
@@ -84,7 +119,7 @@ class WebDriver(unittest.TestCase):
 		self.assertEqual("panel-collapse collapse in", self.driver.find_element_by_id("collapse-checkout-option").get_attribute("class"))
 	
 		#self.loginTestUser()
-	"""
+
 		
 if __name__ == "__main__":
 	unittest.main()
